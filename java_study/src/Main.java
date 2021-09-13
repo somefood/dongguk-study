@@ -3,14 +3,16 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("에라토스테네스 체 소수 판별법");
+        System.out.println("베르트랑 공준");
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("> ");
         int N = scanner.nextInt();
-        int sqrt = (int) Math.sqrt(N);
+        int doubleN = N * 2;
+        int sqrt = (int) Math.sqrt(doubleN);
+        int count = 0;
 
-        boolean[] arr = new boolean[200];
+        boolean[] arr = new boolean[500000];
 
         for(int i=2; i<arr.length; i++) {
             arr[i] = true;
@@ -18,25 +20,21 @@ public class Main {
 
         for (int i=2; i<=sqrt; i++) {
             if(arr[i] == true) {
-                for(int j=i*i; j<=N; j+=i) {
+                for(int j=i*i; j<=doubleN; j+=i) {
                     arr[j] = false;
                 }
             }
         }
 
-        for(int i=2; i<N; i++) {
-            if(arr[i] == true) System.out.print(i + " ");
+        for(int i=2; i<doubleN; i++) {
+            if(arr[i] == true && i > N) {
+                System.out.print(i + " ");
+                count += 1;
+            }
         }
-//
-//        for (int i=4; i<arr.length; i+=2) {
-//            arr[i] = false;
-//        }
-//
-//        for(int i=3; i<arr.length; i+=2) {
-//            for(int j=i+i; j<sqrt; j+=i) {
-//                arr[j] = false;
-//            }
-//        }
+        System.out.println();
+
+        System.out.println(N + "보다 크고 " + (N * 2) + "보다 작은 소수는 " + count + "개이다." );
 
         scanner.close();
     }
