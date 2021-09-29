@@ -2,21 +2,22 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("십진수 -> 이진수 변환");
+        System.out.println("냉장고 코드");
 
-        System.out.print("> ");
         Scanner sc = new Scanner(System.in);
-        int dec = sc.nextInt();
-        sc.close();
+        int i;
+        short flag = 0b000000000000;
 
-        byte[] bin = new byte[100];
-        int cnt = 0;
-        while(dec != 0) {
-            bin[cnt++] = (byte)(dec%2);
-            dec = dec/2;
+        while (true) {
+            System.out.print("> ");
+            i = sc.nextInt();
+            if(i == 13) {
+                System.out.println("종료");
+                break;
+            }
+            flag = (short) (flag | (1 << (i-1)));
+            System.out.println(Integer.toHexString(flag));
         }
-        for(int i=0; i<cnt; i++) {
-            System.out.print(bin[cnt-1-i]);
-        }
+        sc.close();
     }
 }
